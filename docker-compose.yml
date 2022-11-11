@@ -1,0 +1,39 @@
+version: "3.1"
+services:
+  express_backend:
+    container_name: express_api
+    image: express
+    build:
+      context: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      EXTERNAL_PORT: 3000
+      PGDATABASE: test
+      PGUSER: postgres
+      PGPASSWORD: jorge
+      PGHOST: db
+    depends_on:
+      - db
+    command: npm run dev
+  db:
+    container_name: db
+    image: postgres:15.0-alpine
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: jorge
+    # volumes:
+    #   - ./:/var/lib/postgresql/data
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
