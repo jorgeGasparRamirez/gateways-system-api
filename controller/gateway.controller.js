@@ -54,4 +54,18 @@ async function create(req,res, next) {
   }
 }
 
-module.exports = { getAll, getById, create };
+async function drop(req,res,next){
+  try {
+    const gateway = await Gateway.destroy({where:{id: req.params.id}})
+    if(gateway) {
+      res.status(200).json({ response: "Gateway was deleted successfully"})
+    } else {
+      res.status(404).json({response: "This gateway doens't exist"})
+    }
+    
+  } catch (error) {
+    return res.status(500).json({"error": error.message})
+  }
+} 
+
+module.exports = { getAll, getById, create, drop };
