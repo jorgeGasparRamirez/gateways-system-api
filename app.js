@@ -17,7 +17,7 @@ app.use('/gateways', userGateways)
 app.use('/gateways/:id', userGateways)
 
 app.use('/device', userDevices)
-app.use('/device/:id', userDevices)
+app.use('/device/:idGateway/:idDevice', userDevices)
 
 app.listen(process.env.EXTERNAL_PORT || 3000)
 

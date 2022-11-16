@@ -31,7 +31,6 @@ async function create(req,res, next) {
       name: req.body.name,
       ip: req.body.ip,
     })
-    console.log(gateway)
      if(gateway){
        const device=  await Device.create({vendor: req.body.vendor, date: req.body.date, status: req.body.status, gatewayId: gateway.id})
         if(device) {
