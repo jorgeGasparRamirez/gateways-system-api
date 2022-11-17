@@ -15,7 +15,7 @@ const userUser = require('./routes/user')
 const userDevices = require('./routes/devices')
 const userGateways = require('./routes/gateways')
 
-sequilize.sync().then(()=>{
+sequilize.sync({alter:true}).then(()=>{
     User.create({
         email: 'root@gmail.com',
         password: bcrypt.hashSync('PeaceAndLove2022',parseInt(rounds))
